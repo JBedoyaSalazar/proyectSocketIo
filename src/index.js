@@ -3,10 +3,11 @@ import { createServer } from 'http';
 import path from 'path';
 import routes from './routes/index.js';
 import realTimeServer from './realTimeServer.js';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 const server = createServer(app);
-
+app.use(cookieParser());
 
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.resolve('src', 'views'));
