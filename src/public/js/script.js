@@ -8,6 +8,8 @@ sendButton.addEventListener("click", () => {
   const message = messageInput.value.trim();
 
   socket.emit("message", message);
+
+  messageInput.value = "";
 });
 
 socket.on("message", ({ user, message }) => {

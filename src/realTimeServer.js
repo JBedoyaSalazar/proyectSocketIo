@@ -5,12 +5,15 @@ export default (httpServer) => {
     const io = new Server(httpServer);
 
     io.on("connection", socket => {
+
+        const cookie = socket.handshake.headers.cookie;
+        const username = cookie.split("=")[1];
+
         socket.on("message", (message) => {
             io.emit("message", {
-                user: socket.id,
+                user: username,
                 message: message
             });
         });
     });
-
 };
