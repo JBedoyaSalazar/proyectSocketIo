@@ -5,7 +5,12 @@ export default (httpServer) => {
     const io = new Server(httpServer);
 
     io.on("connection", socket => {
-        console.log(`New connection: ${socket.id}`);
+        socket.on("message", (message) => {
+            io.emit("message", {
+                user: socket.id,
+                message: message
+            });
+        });
     });
 
 };
